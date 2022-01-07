@@ -3,6 +3,13 @@
 CurrentDir=$PWD
 
 echo
+if [ ! -f /$CurrentDir/Ports ]; then
+    Error "Ports file is not found in the /$CurrentDir directory"
+    exit;  
+fi
+set -a
+source /$CurrentDir/Ports
+set +a
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     if [[ $i == *"Api" ]]; then
@@ -23,6 +30,5 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     fi
     cd $CurrentDir/$i
     Extract
-    FindPort
     Divide
 done

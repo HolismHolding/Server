@@ -13,8 +13,10 @@ export Repository="$(basename $PWD)"
 export RepositoryPath=$PWD
 export LowercaseOrg=$(echo $OrganizationPrefix | tr '[:upper:]' '[:lower:]')
 export LowercaseRepo=$(echo $Repository | tr '[:upper:]' '[:lower:]')
+export OrganizationRepository=$Organization$Repository
 echo
 Info "Organization: $Organization"
 Info "Organization Prefix: $OrganizationPrefix"
 Info "Repository: $Repository"
+Info "OrganizationRepository: $OrganizationRepository"
 Divide

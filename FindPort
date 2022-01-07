@@ -5,11 +5,11 @@ if [ ! -f /$Organization/Ports ]; then
     exit;  
 fi
 
-OrganizationRepositoryPort=$($cat /"$Organization"/Ports | grep "$Organization$Repository")
+OrganizationRepositoryPort=$(cat "/$Organization/Ports" | grep "$Organization$Repository")
 
 Success $OrganizationRepositoryPort
 
-Port=$($OrganizationRepositoryPort | cut -d'=' -f2)
+Port=$(echo $OrganizationRepositoryPort | cut -d'=' -f2)
 
 Success $Port
 
