@@ -1,3 +1,4 @@
 . /HolismHolding/Server/Message.sh
 . /HolismHolding/Server/Extract
 
+docker-compose -p $Organization$Repository -up d
