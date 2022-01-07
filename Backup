@@ -1,0 +1,3 @@
+SECONDS=0;
+/azcopy copy /$Organization "https://$AzureStorage.blob.core.windows.net/backup/$SAT --recursive=true
+/usr/bin/echo "$(date) - Backup completed - Took $SECONDS seconds" >> /$Organization/CronLog
