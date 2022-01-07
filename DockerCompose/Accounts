@@ -1,0 +1,45 @@
+version: "3.9"
+services: 
+    accounts:
+        image: jboss/keycloak:latest
+        container_name: ${Organization}Accounts
+        ports: 
+            - $$OrganizationRepository:8080
+        environment: 
+            - KEYCLOAK_FRONTEND_URL=https://accounts.freya.center/auth
+            - PROXY_ADDRESS_FORWARDING=true
+            - KEYCLOAK_USER=IpYV8jC0qHxHJUKdBl3C
+            - KEYCLOAK_PASSWORD=5rrI80HK0gd0V3JUhTTO
+            - DB_VENDOR=mariadb
+            - DB_ADDR=database
+            - DB_DATABASE=accounts
+            - DB_USER=05RGACcgoTbln0CK6ml4
+            - DB_PASSWORD=v5kZNXiMjEE6g4StInpf
+        logging:
+            driver: none
+        restart: always
+    database:
+        image: mariadb
+        container_name: ${Organization}AccountsDatabase
+        ports:
+            - $${OrganizationRepository}Databases:3306
+        environment:
+            - MARIADB_ROOT_PASSWORD=v5kZNXiMjEE6g4StInpf
+            - MYSQL_DATABASE=accounts
+            - MYSQL_USER=05RGACcgoTbln0CK6ml4
+            - MYSQL_PASSWORD=v5kZNXiMjEE6g4StInpf
+        volumes:
+            - /${Organization}/Accounts/Database:/var/lib/mysql 
+        restart: always
+    admin:
+        image: adminer
+        container_name: ${OrganizationRepository}Adminer
+        restart: always
+        logging:
+            driver: none
+        ports:
+            - $${OrganizationRepository}Adminer:8080
+        environment:
+            - ADMINER_DEFAULT_SERVER=database
+        networks:
+            - ${Organization}Network
