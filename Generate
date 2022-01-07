@@ -1,0 +1,5 @@
+. /HolismHolding/Infra/Message.sh
+
+for i in $(find . -maxdepth 1 -type d)
+    echo i
+done
