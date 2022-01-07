@@ -16,6 +16,11 @@ function GenerateSiteAndPanelDockerCompose()
     envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose.yml
 }
 
+function SetPort()
+{
+    envsubst < /$Organization/$Repository/docker-compose.yml > /$Organization/$Repository/docker-compose.yml
+}
+
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
@@ -35,5 +40,6 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
         Error "$i is unknown"
         exit;
     fi
+    SetPort
     Divide
 done
