@@ -11,17 +11,22 @@ set -a
 source /$CurrentDir/Ports
 set +a
 
+function GenerateSiteAndPanelDockerCompose()
+{
+    envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose.yml
+}
+
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     if [[ $i == *"Api" ]]; then
         Success "$i is API"
     elif [[ $i == *"Panel" ]]; then
-        Success "$i is Panel"
+        GenerateSiteAndPanelDockerCompose
     elif [[ $i == "Accounts" ]]; then
         Success "$i is Accounts"
     elif [[ $i == "Blog" ]]; then
         Success "$i is Blog"
     elif [[ $i == "Site" ]]; then
-        Success "$i is Site";
+        GenerateSiteAndPanelDockerCompose
     elif [[ $i == "Databases" ]]; then
         Success "$i is Databases"
     else
