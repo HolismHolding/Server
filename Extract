@@ -1,7 +1,7 @@
 . /HolismHolding/Server/Message.sh
 
 # Divide
-Info "Directory: $PWD"
+# Info "Directory: $PWD"
 export Organization="`dirname $PWD | sed 's/\///g'`"
 if [[ $Organization == *"Holism"* ]]; then
     export OrganizationPrefix="Holism";

@@ -57,5 +57,6 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
         exit;
     fi
     SetPort
+    Success "/$Organization/$Repository"
     # Divide
 done
