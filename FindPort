@@ -1,0 +1,15 @@
+. /HolismHolding/Server/Message.sh
+
+if [ ! -f Ports ]; then
+    Error "Ports file is not found in the current directory"
+    Error "Run FindPort command in the organization's root directory"
+    exit;  
+fi
+
+Port=$(cat Ports | grep $Organization$Repository)
+
+Success $Port
+
+
+        # Org=$(echo $Dependency | cut -d'/' -f1)
+        # Repo=$(echo $Dependency | cut -d'/' -f2)  

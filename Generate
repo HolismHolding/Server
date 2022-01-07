@@ -2,18 +2,18 @@
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     if [[ $i == *"Api" ]]; then
-        echo "$i is API"
+        Success "$i is API"
     elif [[ $i == *"Panel" ]]; then
-        echo "$i is Panel"
+        Success "$i is Panel"
     elif [[ $i == "Accounts" ]]; then
-        echo "$i is Accounts";
+        Success "$i is Accounts";
     elif [[ $i == "Blog" ]]; then
-        echo "$i is Blog";
+        Success "$i is Blog";
     elif [[ $i == "Site" ]]; then
-        echo "$i is Site";
+        Success "$i is Site";
     elif [[ $i == "Databases" ]]; then
-        echo "$i is Databases";
+        Success "$i is Databases";
     else
-        echo $i
+        Error $i
     fi
 done
