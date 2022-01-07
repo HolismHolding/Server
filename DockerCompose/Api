@@ -10,9 +10,9 @@ services:
         ports:
             - $$OrganizationRepository:5000
         networks:
-            - $OrganizationNetwork
+            - ${Organization}Network
 
 networks:
-    $OrganizationNetwork:
-        name: $OrganizationNetwork
+    ${Organization}Network:
+        name: ${Organization}Network
         driver: bridge
