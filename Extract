@@ -14,7 +14,7 @@ export RepositoryPath=$PWD
 export LowercaseOrg=$(echo $OrganizationPrefix | tr '[:upper:]' '[:lower:]')
 export LowercaseRepo=$(echo $Repository | tr '[:upper:]' '[:lower:]')
 export OrganizationRepository=$Organization$Repository
-echo
+# echo
 # Info "Organization: $Organization"
 # Info "Organization Prefix: $OrganizationPrefix"
 # Info "Repository: $Repository"

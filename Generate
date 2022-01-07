@@ -11,6 +11,11 @@ set -a
 source /$CurrentDir/Params
 set +a
 
+function GenerateAccountsDockerCompose()
+{
+    envsubst < /HolismHolding/Server/DockerCompose/Accounts > /$Organization/$Repository/docker-compose-temp.yml
+}
+
 function GenerateSiteAndBlogAndPanelDockerCompose()
 {
     envsubst < /HolismHolding/Server/DockerCompose/SiteAndBlogAndPanel > /$Organization/$Repository/docker-compose-temp.yml
@@ -40,7 +45,7 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     elif [[ $i == *"Panel" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
     elif [[ $i == "Accounts" ]]; then
-        Success "$i is Accounts"
+        GenerateAccountsDockerCompose
     elif [[ $i == "Blog" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
     elif [[ $i == "Site" ]]; then
@@ -52,5 +57,5 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
         exit;
     fi
     SetPort
-    Divide
+    # Divide
 done
