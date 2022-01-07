@@ -1,8 +1,7 @@
 . /HolismHolding/Server/Message.sh
 
-if [ ! -f Ports ]; then
-    Error "Ports file is not found in the current directory"
-    Error "Run FindPort command in the organization's root directory"
+if [ ! -f /$Organization/Ports ]; then
+    Error "Ports file is not found in the /$Organization directory"
     exit;  
 fi
 

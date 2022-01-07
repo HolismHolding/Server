@@ -6,14 +6,18 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     elif [[ $i == *"Panel" ]]; then
         Success "$i is Panel"
     elif [[ $i == "Accounts" ]]; then
-        Success "$i is Accounts";
+        Success "$i is Accounts"
     elif [[ $i == "Blog" ]]; then
-        Success "$i is Blog";
+        Success "$i is Blog"
     elif [[ $i == "Site" ]]; then
         Success "$i is Site";
     elif [[ $i == "Databases" ]]; then
-        Success "$i is Databases";
+        Success "$i is Databases"
     else
-        Error $i
+        Error "$i is unknown"
+        exit;
     fi
+    cd /$Organization/$i
+    Extract
+    FindPort
 done
