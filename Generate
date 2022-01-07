@@ -17,6 +17,8 @@ function GenerateSiteAndPanelDockerCompose()
 }
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
+    cd $CurrentDir/$i
+    . /HolismHolding/Server/Extract
     if [[ $i == *"Api" ]]; then
         Success "$i is API"
     elif [[ $i == *"Panel" ]]; then
@@ -33,7 +35,5 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
         Error "$i is unknown"
         exit;
     fi
-    cd $CurrentDir/$i
-    Extract
     Divide
 done
