@@ -1,3 +1,4 @@
 . /HolismHolding/Server/Message.sh
 . /HolismHolding/Server/Extract
 
+docker pull ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
