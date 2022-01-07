@@ -11,6 +11,11 @@ set -a
 source /$CurrentDir/Ports
 set +a
 
+function GenerateApiDockerCompose()
+{
+    envsubst < /HolismHolding/Server/DockerCompose/Api > /$Organization/$Repository/docker-compose-temp.yml
+}
+
 function GenerateSiteAndPanelDockerCompose()
 {
     envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose-temp.yml
@@ -26,7 +31,7 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
     if [[ $i == *"Api" ]]; then
-        Success "$i is API"
+        GenerateApiDockerCompose
     elif [[ $i == *"Panel" ]]; then
         GenerateSiteAndPanelDockerCompose
     elif [[ $i == "Accounts" ]]; then

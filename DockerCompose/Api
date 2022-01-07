@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+    api:
+        image: ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
+        container_name: $Organization$Repository
+        working_dir: /$Organization/$Repository
+        volumes:
+            - /$Organization/$Repository/ConnectionStrings.json:/$Organization/$Repository/ConnectionStrings.json
+            - /$Organization/$Repository/Settings.json:/$Organization/$Repository/Settings.json
+        ports:
+            - $$OrganizationRepository:5000
+        networks:
+            - $OrganizationNetwork
+
+networks:
+    $OrganizationNetwork:
+        name: $OrganizationNetwork
+        driver: bridge
