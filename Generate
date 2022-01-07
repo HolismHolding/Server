@@ -1,5 +1,5 @@
-. /HolismHolding/Infra/Message.sh
+. /HolismHolding/Server/Message.sh
 
-for i in $(find . -maxdepth 1 -type d)
-    echo i
+for i in $(find . -maxdepth 1 -type d); do
+    echo $i
 done
