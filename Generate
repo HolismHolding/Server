@@ -1,5 +1,7 @@
 . /HolismHolding/Server/Message.sh
 
+CurrentDir=$PWD
+
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     if [[ $i == *"Api" ]]; then
         Success "$i is API"
@@ -17,7 +19,7 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
         Error "$i is unknown"
         exit;
     fi
-    cd /$Organization/$i
+    cd /$CurrentDir/$i
     Extract
     FindPort
 done
