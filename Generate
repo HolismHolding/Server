@@ -11,14 +11,19 @@ set -a
 source /$CurrentDir/Ports
 set +a
 
+function GenerateSiteAndBlogAndPanelDockerCompose()
+{
+    envsubst < /HolismHolding/Server/DockerCompose/SiteAndBlogAndPanel > /$Organization/$Repository/docker-compose-temp.yml
+}
+
+function GenerateDatabasesDockerCompose()
+{
+    envsubst < /HolismHolding/Server/DockerCompose/Databases > /$Organization/$Repository/docker-compose-temp.yml
+}
+
 function GenerateApiDockerCompose()
 {
     envsubst < /HolismHolding/Server/DockerCompose/Api > /$Organization/$Repository/docker-compose-temp.yml
-}
-
-function GenerateSiteAndPanelDockerCompose()
-{
-    envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose-temp.yml
 }
 
 function SetPort()
@@ -33,15 +38,15 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     if [[ $i == *"Api" ]]; then
         GenerateApiDockerCompose
     elif [[ $i == *"Panel" ]]; then
-        GenerateSiteAndPanelDockerCompose
+        GenerateSiteAndBlogAndPanelDockerCompose
     elif [[ $i == "Accounts" ]]; then
         Success "$i is Accounts"
     elif [[ $i == "Blog" ]]; then
-        Success "$i is Blog"
+        GenerateSiteAndBlogAndPanelDockerCompose
     elif [[ $i == "Site" ]]; then
-        GenerateSiteAndPanelDockerCompose
+        GenerateSiteAndBlogAndPanelDockerCompose
     elif [[ $i == "Databases" ]]; then
-        Success "$i is Databases"
+        GenerateDatabasesDockerCompose
     else
         Error "$i is unknown"
         exit;
