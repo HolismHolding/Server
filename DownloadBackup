@@ -1,0 +1,1 @@
+/azcopy copy "https://${AzureStorage}.blob.core.windows.net/backup/${SAT}" /${Organization} --recursive=true
