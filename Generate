@@ -13,12 +13,13 @@ set +a
 
 function GenerateSiteAndPanelDockerCompose()
 {
-    envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose.yml
+    envsubst < /HolismHolding/Server/DockerCompose/SiteAndPanel > /$Organization/$Repository/docker-compose-temp.yml
 }
 
 function SetPort()
 {
-    envsubst < /$Organization/$Repository/docker-compose.yml > /$Organization/$Repository/docker-compose.yml
+    envsubst < /$Organization/$Repository/docker-compose-temp.yml > /$Organization/$Repository/docker-compose.yml
+    rm /$Organization/$Repository/docker-compose-temp.yml
 }
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
