@@ -5,7 +5,7 @@ if [ ! -f /$Organization/Ports ]; then
     exit;  
 fi
 
-Port=$(cat Ports | grep $Organization$Repository)
+Port=$(cat /$Organization/Ports | grep $Organization$Repository)
 
 Success $Port
 
