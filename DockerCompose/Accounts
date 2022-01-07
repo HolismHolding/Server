@@ -6,7 +6,7 @@ services:
         ports: 
             - $$Repository:8080
         environment: 
-            - KEYCLOAK_FRONTEND_URL=https://accounts.$${Organization}Domain/auth
+            - KEYCLOAK_FRONTEND_URL=https://accounts.$Domain/auth
             - PROXY_ADDRESS_FORWARDING=true
             - KEYCLOAK_USER=$${Repository}AdminUser
             - KEYCLOAK_PASSWORD=$${Repository}AdminPassword
