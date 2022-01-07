@@ -5,7 +5,7 @@ if [ ! -f /$Organization/Ports ]; then
     exit;  
 fi
 
-OrganizationRepositoryPort=$(export Organization=$Organization Repository=$Repository; $cat /$Organization/Ports | grep $Organization$Repository)
+OrganizationRepositoryPort=$($cat /"$Organization"/Ports | grep "$Organization$Repository")
 
 Success $OrganizationRepositoryPort
 
