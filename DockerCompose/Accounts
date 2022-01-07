@@ -6,10 +6,10 @@ services:
         ports: 
             - $$OrganizationRepository:8080
         environment: 
-            - KEYCLOAK_FRONTEND_URL=https://accounts.freya.center/auth
+            - KEYCLOAK_FRONTEND_URL=https://accounts.$${Organization}Domain/auth
             - PROXY_ADDRESS_FORWARDING=true
-            - KEYCLOAK_USER=IpYV8jC0qHxHJUKdBl3C
-            - KEYCLOAK_PASSWORD=5rrI80HK0gd0V3JUhTTO
+            - KEYCLOAK_USER=$${OrganizationRepository}AdminUser
+            - KEYCLOAK_PASSWORD=$${OrganizationRepository}AdminPassword
             - DB_VENDOR=mariadb
             - DB_ADDR=database
             - DB_DATABASE=accounts

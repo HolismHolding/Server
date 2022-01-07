@@ -3,12 +3,12 @@
 CurrentDir=$PWD
 
 echo
-if [ ! -f /$CurrentDir/Ports ]; then
-    Error "Ports file is not found in the /$CurrentDir directory"
+if [ ! -f /$CurrentDir/Params ]; then
+    Error "Params file is not found in the /$CurrentDir directory"
     exit;  
 fi
 set -a
-source /$CurrentDir/Ports
+source /$CurrentDir/Params
 set +a
 
 function GenerateSiteAndBlogAndPanelDockerCompose()

@@ -8,7 +8,7 @@ services:
             - /$Organization/$Repository/ConnectionStrings.json:/$Organization/$Repository/ConnectionStrings.json
             - /$Organization/$Repository/Settings.json:/$Organization/$Repository/Settings.json
         ports:
-            - $$OrganizationRepository:5000
+            - $$Repository:5000
         networks:
             - ${Organization}Network
 
