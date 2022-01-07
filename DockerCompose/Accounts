@@ -4,17 +4,17 @@ services:
         image: jboss/keycloak:latest
         container_name: ${Organization}Accounts
         ports: 
-            - $$OrganizationRepository:8080
+            - $$Repository:8080
         environment: 
             - KEYCLOAK_FRONTEND_URL=https://accounts.$${Organization}Domain/auth
             - PROXY_ADDRESS_FORWARDING=true
-            - KEYCLOAK_USER=$${OrganizationRepository}AdminUser
-            - KEYCLOAK_PASSWORD=$${OrganizationRepository}AdminPassword
+            - KEYCLOAK_USER=$${Repository}AdminUser
+            - KEYCLOAK_PASSWORD=$${Repository}AdminPassword
             - DB_VENDOR=mariadb
             - DB_ADDR=database
             - DB_DATABASE=accounts
-            - DB_USER=05RGACcgoTbln0CK6ml4
-            - DB_PASSWORD=v5kZNXiMjEE6g4StInpf
+            - DB_USER=$${Repository}MariaUser
+            - DB_PASSWORD=$${Repository}MariaPassword
         logging:
             driver: none
         restart: always
@@ -22,14 +22,14 @@ services:
         image: mariadb
         container_name: ${Organization}AccountsDatabase
         ports:
-            - $${OrganizationRepository}Databases:3306
+            - $${Repository}Databases:3306
         environment:
-            - MARIADB_ROOT_PASSWORD=v5kZNXiMjEE6g4StInpf
+            - MARIADB_ROOT_PASSWORD=$${Repository}MariaRoot
             - MYSQL_DATABASE=accounts
-            - MYSQL_USER=05RGACcgoTbln0CK6ml4
-            - MYSQL_PASSWORD=v5kZNXiMjEE6g4StInpf
+            - MYSQL_USER=$${Repository}MariaUser
+            - MYSQL_PASSWORD=$${Repository}MariaPassword
         volumes:
-            - /${Organization}/Accounts/Database:/var/lib/mysql 
+            - /${Organization}/Accounts/Databases:/var/lib/mysql 
         restart: always
     admin:
         image: adminer
@@ -38,7 +38,7 @@ services:
         logging:
             driver: none
         ports:
-            - $${OrganizationRepository}Adminer:8080
+            - $${Repository}Adminer:8080
         environment:
             - ADMINER_DEFAULT_SERVER=database
         networks:
