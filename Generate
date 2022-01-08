@@ -65,17 +65,17 @@ function CalculateSubdomain()
 
 function GenerateNiginxConfig()
 {
-    export NginxParamsServerName=$NginxParamsServerName
-    export NginParamsRequestUri=$NginParamsRequestUri
-    export NginxParamsHost=$NginxParamsHost;
-    export NginxParamsScheme=$NginxParamsScheme;
+    export NginxParamsServerName='$NginxParamsServerName'
+    export NginParamsRequestUri='$NginParamsRequestUri'
+    export NginxParamsHost='$NginxParamsHost;'
+    export NginxParamsScheme='$NginxParamsScheme;'
 
     envsubst < /HolismHolding/Server/Nginx/$1 > /$Organization/$Repository/$Subdomain$Domain.conf.temp
 
-    export NginxParamsServerName=$server_name
-    export NginParamsRequestUri=$request_uri
-    export NginxParamsHost=$host;
-    export NginxParamsScheme=$scheme;
+    export NginxParamsServerName='$server_name'
+    export NginParamsRequestUri='$request_uri'
+    export NginxParamsHost='$host';
+    export NginxParamsScheme='$scheme';
 
     envsubst < /$Organization/$Repository/$Subdomain$Domain.conf.temp > /$Organization/$Repository/$Subdomain$Domain.conf
 
