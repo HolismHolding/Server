@@ -41,7 +41,11 @@ function CalculateSubdomain()
 {
     if [[ $Repository == *"Api" ]]; then
         Subdomain=`echo $Repository | sed 's/Api//g'`
-        Subdomain="api.$Subdomain"
+        if [[ $Subdomain == "Site" ]]; then
+            Subdomain="api"
+        else
+            Subdomain="api.$Subdomain"
+        fi
     elif [[ $Repository == *"Panel" ]]; then
         Subdomain=`echo $Repository | sed 's/Panel//g'`
     elif [[ $Repository == "Blog" ]]; then
@@ -53,6 +57,8 @@ function CalculateSubdomain()
     fi
     if [[ Subdomain != "" ]]; then
         export Subdomain=$(echo $Subdomain | tr '[:upper:]' '[:lower:]').
+    else
+        export Subdomain=""
     fi
     Info "Subdomain is $Subdomain"
 }
