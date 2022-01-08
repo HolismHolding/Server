@@ -46,6 +46,8 @@ function CalculateSubdomain()
         Subdomain=`echo $Repository | sed 's/Panel//g'`
     elif [[ $Repository == "Blog" ]]; then
         Subdomain=Blog
+    elif [[ $Repository == "Accounts" ]]; then
+        Subdomain=Accounts
     else
         Subdomain=""
     fi
