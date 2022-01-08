@@ -37,19 +37,46 @@ function SetPort()
     rm /$Organization/$Repository/docker-compose-temp.yml
 }
 
+function CalculateSubdomain()
+{
+    if [ $Repository = *"Api" ]; then
+        Subdomain=`echo $Organization | sed 's/Api//g'`
+    elif [ $Repository = *"Panel" ]; then
+        Subdomain=`echo $Repository | sed 's/Panel//g'`
+    elif [ $Repository = "Blog"]; then
+        Subdomain=Blog
+    fi
+    if [ Subdomain != "" ]; then
+        export Subdomain=$(echo $Subdomain | tr '[:upper:]' '[:lower:]').
+    fi
+    Info "Subdomain is $Subdomain"
+}
+
+function GenerateNiginxConfig()
+{
+    envsubst < /HolismHolding/Server/Nginx/$1 > /$Organization/$Repository/$Subdomain$Domain.conf.temp
+    envsubst < /$Organization/$Repository/$Subdomain$Domain.conf.temp > /$Organization/$Repository/$Subdomain$Domain.conf
+    rm /$Organization/$Repository/$Subdomain$Domain.conf.temp
+}
+
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
-    if [[ $i == *"Api" ]]; then
-        GenerateApiDockerCompose
-    elif [[ $i == *"Panel" ]]; then
+    if [[ $i == *"Site" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
+        GenerateNiginxConfig SiteAndApiAndBlogAndPanel
+    elif [[ $i == *"Blog" ]]; then
+        GenerateSiteAndBlogAndPanelDockerCompose
+        GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Accounts" ]]; then
         GenerateAccountsDockerCompose
-    elif [[ $i == "Blog" ]]; then
+        GenerateNiginxConfig Accounts
+    elif [[ $i == "Panel" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
-    elif [[ $i == "Site" ]]; then
-        GenerateSiteAndBlogAndPanelDockerCompose
+        GenerateNiginxConfig SiteAndApiAndBlogAndPanel
+    elif [[ $i == "Api" ]]; then
+        GenerateApiDockerCompose
+        GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Databases" ]]; then
         GenerateDatabasesDockerCompose
     else
