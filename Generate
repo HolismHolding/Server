@@ -74,12 +74,12 @@ function GenerateNiginxConfig()
 
     export NginxParamsServerName='$server_name'
     export NginParamsRequestUri='$request_uri'
-    export NginxParamsHost='$host';
-    export NginxParamsScheme='$scheme';
+    export NginxParamsHost='$host'
+    export NginxParamsScheme='$scheme'
 
     envsubst < /$Organization/$Repository/$Subdomain$Domain.conf.temp > /$Organization/$Repository/$Subdomain$Domain.conf
 
-    #rm /$Organization/$Repository/$Subdomain$Domain.conf.temp
+    rm /$Organization/$Repository/$Subdomain$Domain.conf.temp
 }
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
