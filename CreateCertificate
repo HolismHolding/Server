@@ -21,6 +21,12 @@ envsubst < /HolismHolding/Server/Nginx/ForCertificate > /$CurrentDir/Site/$Domai
 
 ln -s -f /$CurrentDir/Site/$Domain.conf /etc/nginx/conf.d/$Domain.conf
 
+# https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
+
+# certbot --nginx -d freya.center => load San file
+# Setup this cron:
+# 0 12 * * * /usr/bin/certbot renew --quiet
+
 nginx -t
 
 nginx -s reload
