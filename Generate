@@ -39,14 +39,16 @@ function SetPort()
 
 function CalculateSubdomain()
 {
-    if [ $Repository == *"Api" ]; then
+    if [[ $Repository == *"Api" ]]; then
         Subdomain=`echo $Repository | sed 's/Api//g'`
-    elif [ $Repository == *"Panel" ]; then
+    elif [[ $Repository == *"Panel" ]]; then
         Subdomain=`echo $Repository | sed 's/Panel//g'`
-    elif [ $Repository == "Blog"]; then
+    elif [[ $Repository == "Blog" ]]; then
         Subdomain=Blog
+    else
+        Subdomain=""
     fi
-    if [ Subdomain != "" ]; then
+    if [[ Subdomain != "" ]]; then
         export Subdomain=$(echo $Subdomain | tr '[:upper:]' '[:lower:]').
     fi
     Info "Subdomain is $Subdomain"
