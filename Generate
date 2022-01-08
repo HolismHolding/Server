@@ -67,23 +67,20 @@ function GenerateNiginxConfig()
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
+    CalculateSubdomain
     if [[ $i == "Site" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Blog" ]]; then
-        CalculateSubdomain
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Accounts" ]]; then
-        CalculateSubdomain
         GenerateAccountsDockerCompose
         GenerateNiginxConfig Accounts
     elif [[ $i == *"Panel" ]]; then
-        CalculateSubdomain
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == *"Api" ]]; then
-        CalculateSubdomain
         GenerateApiDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Databases" ]]; then
