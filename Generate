@@ -62,19 +62,19 @@ function GenerateNiginxConfig()
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
-    if [[ $i == *"Site" ]]; then
+    if [[ $i == "Site" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
-    elif [[ $i == *"Blog" ]]; then
+    elif [[ $i == "Blog" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Accounts" ]]; then
         GenerateAccountsDockerCompose
         GenerateNiginxConfig Accounts
-    elif [[ $i == "Panel" ]]; then
+    elif [[ $i == *"Panel" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
-    elif [[ $i == "Api" ]]; then
+    elif [[ $i == *"Api" ]]; then
         GenerateApiDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
     elif [[ $i == "Databases" ]]; then
