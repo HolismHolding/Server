@@ -17,4 +17,10 @@ nginx -t
 
 nginx -s reload
 
-envsubst < /HolismHolding/Server/Nginx/ForCertificate > /$CurrentDir/$Site/$Domain.conf
+envsubst < /HolismHolding/Server/Nginx/ForCertificate > /$CurrentDir/Site/$Domain.conf
+
+ln -s -f /$CurrentDir/Site/$Domain.conf /etc/nginx/conf.d/$Domain.conf
+
+nginx -t
+
+nginx -s reload
