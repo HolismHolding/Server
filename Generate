@@ -55,10 +55,10 @@ function CalculateSubdomain()
     else
         Subdomain=""
     fi
-    if [[ Subdomain != "" ]]; then
-        export Subdomain=$(echo $Subdomain | tr '[:upper:]' '[:lower:]').
-    else
+    if [[ $Subdomain == "" ]]; then
         export Subdomain=""
+    else
+        export Subdomain=$(echo $Subdomain | tr '[:upper:]' '[:lower:]').
     fi
     Info "Subdomain is $Subdomain"
 }
