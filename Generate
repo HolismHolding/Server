@@ -65,6 +65,11 @@ function CalculateSubdomain()
 
 function GenerateNiginxConfig()
 {
+    export server_name=$server_name
+    export request_uri=$request_uri
+    export host=$host;
+    export scheme=$scheme;
+    
     envsubst < /HolismHolding/Server/Nginx/$1 > /$Organization/$Repository/$Subdomain$Domain.conf.temp
     envsubst < /$Organization/$Repository/$Subdomain$Domain.conf.temp > /$Organization/$Repository/$Subdomain$Domain.conf
     rm /$Organization/$Repository/$Subdomain$Domain.conf.temp
