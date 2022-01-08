@@ -1,0 +1,20 @@
+. /HolismHolding/Server/Message.sh
+
+CurrentDir=$PWD
+
+echo
+if [ ! -f /$CurrentDir/Params ]; then
+    Error "Params file is not found in the /$CurrentDir directory"
+    exit;  
+fi
+set -a
+source /$CurrentDir/Params
+set +a
+
+find /etc/nginx/conf.d -name "$Domain" | xargs rm -rf
+
+nginx -t
+
+nginx -s reload
+
+envsubst < /HolismHolding/Server/Nginx/ForCertificate > /$CurrentDir/$Site/$Domain.conf
