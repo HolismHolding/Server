@@ -67,8 +67,8 @@ function GenerateNiginxConfig()
 {
     export NginxParamsServerName='$NginxParamsServerName'
     export NginParamsRequestUri='$NginParamsRequestUri'
-    export NginxParamsHost='$NginxParamsHost;'
-    export NginxParamsScheme='$NginxParamsScheme;'
+    export NginxParamsHost='$NginxParamsHost'
+    export NginxParamsScheme='$NginxParamsScheme'
 
     envsubst < /HolismHolding/Server/Nginx/$1 > /$Organization/$Repository/$Subdomain$Domain.conf.temp
 
