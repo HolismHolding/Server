@@ -1,12 +1,20 @@
 . /HolismHolding/Server/Message.sh
 
 CurrentDir=$PWD
+Regex=$1
 
 for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
     if [ -f /$Organization/$Repository/docker-compose.yml ]; then
-        cd /$Organization/$Repository
-        Restart
+        if [[ $Regex != "" ]]; then
+            if [[ $Repository == *"$Regex" ]]; then
+                cd /$Organization/$Repository
+                Restart
+            fi
+        else
+            cd /$Organization/$Repository
+            Restart
+        fi
     fi
 done
