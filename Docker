@@ -1,0 +1,9 @@
+#!/bin/bash
+
+Regex=$1
+
+if [[ $Regex != "" ]]; then
+    docker stats --no-stream | grep $Regex
+else
+    docker stats --no-stream
+fi
