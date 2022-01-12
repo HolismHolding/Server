@@ -15,6 +15,7 @@ services:
     networks:
       - ${Organization}Network
   admin:
+    # https://www.adminer.org/en/plugins/otp/
     image: adminer
     container_name: ${Organization}Adminer
     restart: always
