@@ -13,9 +13,9 @@ set +a
 
 function GetDockerImageName()
 {
-    DockerImageName=ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
+    export DockerImageName=ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
     if [[ $ParentOrganization != "" ]]; then
-        DockerImageName=ghcr.io/$LowercaseParentOrg/${LowercaseOrg}/${LowercaseRepo}:latest
+        export DockerImageName=ghcr.io/$LowercaseParentOrg/${LowercaseOrg}/${LowercaseRepo}:latest
     fi
 }
 
