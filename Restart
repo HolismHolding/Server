@@ -1,6 +1,17 @@
 . /HolismHolding/Server/Message.sh
 . /HolismHolding/Server/Extract
 
+echo
+echo
+Warning 'This means Pull, Down, Up'
+Warning 'Latest image would be pulled'
+Warning 'Still restarting? (y,n)'
+read Consent
+
+if [ $Consent != 'y' ]; then
+    exit;
+fi
+
 Pull
 Down
 Up
