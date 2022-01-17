@@ -1,4 +1,8 @@
 . /HolismHolding/Server/Message.sh
 . /HolismHolding/Server/Extract
 
-docker pull ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
+if [[ $ParentOrganization != "" ]]; then
+    docker pull ghcr.io/$LowercaseParentOrg/$LowercaseOrg/$LowercaseRepo:latest
+else
+    docker pull ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
+fi
