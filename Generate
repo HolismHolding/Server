@@ -11,6 +11,14 @@ set -a
 source /$CurrentDir/Params
 set +a
 
+function GetDockerImageName()
+{
+    DockerImageName=ghcr.io/$LowercaseOrg/$LowercaseRepo:latest
+    if [[ $ParentOrganization != "" ]]; then
+        DockerImageName=ghcr.io/$LowercaseParentOrg/${LowercaseOrg}/${LowercaseRepo}
+    fi
+}
+
 function GenerateAccountsDockerCompose()
 {
     envsubst < /HolismHolding/Server/DockerCompose/Accounts > /$Organization/$Repository/docker-compose-temp.yml
@@ -88,6 +96,7 @@ for i in $(find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n'); do
     cd $CurrentDir/$i
     . /HolismHolding/Server/Extract
     CalculateSubdomain
+    GetDockerImageName
     if [[ $i == "Site" ]]; then
         GenerateSiteAndBlogAndPanelDockerCompose
         GenerateNiginxConfig SiteAndApiAndBlogAndPanel
