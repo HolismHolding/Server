@@ -1,9 +1,8 @@
 #!/bin/bash
 
-Regex=$1
+# /Temp/Organizations => a file containing organization names line by line
 
-if [[ $Regex != "" ]]; then
-    docker stats --no-stream | grep $Regex
-else
-    docker stats --no-stream
-fi
+# /HolismHolding/Server/DockerAwk.sh => the command here:
+# https://unix.stackexchange.com/questions/688228/how-to-group-docker-stats-by-container-name-prefix
+
+docker stats --no-stream | awk -f /HolismHolding/Server/DockerAwk.sh /Temp/Organizations -
