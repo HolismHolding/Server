@@ -1,0 +1,25 @@
+. /HolismHolding/Server/Message.sh
+. /HolismHolding/Server/Extract
+
+export ContainerName=$1;
+
+if [[ $ContainerName == "" ]]; then
+    ContainerName=$Organization$Repository
+fi
+
+docker ps -a | grep $ContainerName
+
+export ExitCode=$?
+
+if [[ $ExitCode != 0 ]];
+then
+    Divide
+    Error "No container named $ContainerName is found"
+    Divide
+    exit
+fi
+
+Divide
+Info "Entering into $ContainerName"
+Divide
+docker exec -it $ContainerName bash
