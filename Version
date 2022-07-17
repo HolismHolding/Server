@@ -1,0 +1,6 @@
+. /HolismHolding/Server/Message.sh
+. /HolismHolding/Server/Extract
+
+if [[ $Repository == "Accounts" ]]; then
+    docker exec $Organization$Repository bash -c "/opt/jboss/keycloak/bin/standalone.sh -version"
+fi
